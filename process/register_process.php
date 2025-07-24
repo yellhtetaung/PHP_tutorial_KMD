@@ -1,6 +1,6 @@
 <?php
 
-include "../connection.php";
+include("../connection.php");
 
 if (isset($_POST['btnRegister'])) {
     $username = $_POST['username'];
@@ -9,19 +9,17 @@ if (isset($_POST['btnRegister'])) {
 
     $checkQuery = "SELECT * FROM tblUser WHERE username='$username' OR email='$email'";
     $checkResult = mysqli_query($connection, $checkQuery);
-    $arr = mysqli_fetch_array($checkResult);
-    $checkUsername = $arr['username'] ?? null;
-    $checkEmail = $arr['email'] ?? null;
+    $users = mysqli_fetch_array($checkResult);
+    $checkUsername = $users['username'] ?? null;
+    $checkEmail = $users['email'] ?? null;
 
     if ($checkUsername == $username) {
         echo "<script>window.alert('Username already exist!');</script>";
         echo "<script>window.location = '../register.php';</script>";
-    }
-    else if ($checkEmail == $email) { 
+    } else if ($checkEmail == $email) {
         echo "<script>window.alert('Email already exist!');</script>";
         echo "<script>window.location = '../register.php';</script>";
-    }
-    else {
+    } else {
         $regQuery = "INSERT INTO tblUser (username, email, password) VALUES ('$username', '$email', '$password')";
         $result = mysqli_query($connection, $regQuery);
 
@@ -34,5 +32,3 @@ if (isset($_POST['btnRegister'])) {
         }
     }
 }
-
-?>

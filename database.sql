@@ -1,0 +1,10 @@
+CREATE DATABASE L5DC113;
+
+USE L5DC113;
+
+CREATE TABLE tblUser(
+    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(100)
+);
